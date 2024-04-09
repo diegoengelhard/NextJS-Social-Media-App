@@ -2,6 +2,8 @@ import '../globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
+import AuthProvider from '@/app/context/authProvider'
+
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -16,7 +18,22 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <AuthProvider>
+          {/* <Topbar /> */}
+
+          <main className="flex flex-row">
+            {/* <LeftSidebar /> */}
+            <section className='main-container'>
+              <div className='w-full max-w-4xl'>
+                {children}
+              </div>
+            </section>
+          </main>
+
+          {/* <Bottombar /> */}
+        </AuthProvider>
+      </body>
     </html>
   )
 }
