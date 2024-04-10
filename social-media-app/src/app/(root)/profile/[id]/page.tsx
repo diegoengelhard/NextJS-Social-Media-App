@@ -2,7 +2,7 @@ import React from 'react'
 
 const page = () => {
     return (
-        <div>user profile page</div>
+        <div className='text-white'>user profile page</div>
     )
 }
 

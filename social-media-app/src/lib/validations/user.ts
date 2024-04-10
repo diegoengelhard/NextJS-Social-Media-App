@@ -11,4 +11,8 @@ export const UserValidation = z.object({
     .max(30, { message: "Maximum 30 caracters." }),
   bio: z
     .string()
+    .optional(),
+  image: z
+    .string()
+    .optional(),
 });

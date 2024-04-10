@@ -11,7 +11,6 @@ import { connect } from '@/config/mongoose';
 interface Params {
     userId: string;
     username: string;
-    email: string;
     fullname: string;
     bio: string;
     image: string;
@@ -52,7 +51,7 @@ export async function updateUser({ userId, bio, fullname, path, username, image 
         }
 
         await User.findOneAndUpdate(
-            { id: userId },
+            { _id: userId },
             {
                 username: username.toLowerCase(),
                 fullname,
