@@ -30,7 +30,7 @@ export async function createPost({ text, author, communityId, path }: Params) {
 
         // Update user who created the post
         await User.findOneAndUpdate(
-            { id: author },
+            { _id: author },
             { $push: { posts: post._id } },
             { upsert: true }
         );
