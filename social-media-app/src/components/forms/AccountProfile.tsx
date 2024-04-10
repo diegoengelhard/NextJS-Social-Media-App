@@ -37,7 +37,7 @@ interface Props {
     btnTitle: string;
 }
 
-const AccountProfile = ({ user, btnTitle }: Props) => {
+const AccountProfile = ({ user, btnTitle}: Props) => {
     const params = useParams();
     if (params.id !== user.id) redirect("/");
 
