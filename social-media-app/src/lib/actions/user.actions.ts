@@ -34,6 +34,21 @@ export async function fetchUser(email: string) {
     }
 }
 
+export async function fetchUserById(userId: string) {
+    connect();
+
+    try {
+        // find user by id
+        const user = await User.findOne({ _id: userId})
+
+        // return user
+        return user;
+    } catch (error: any) {
+        console.log('Error fetching user: ', error);
+        throw new Error(`Failed to fetch user: ${error.message}`);
+    }
+}
+
 // Method to Update User
 export async function updateUser({ userId, bio, fullname, path, username, image }: Params): Promise<void> {
     try {
