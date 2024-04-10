@@ -22,7 +22,11 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
-    image: String,
+    image: {
+        type: String,
+        default: 'https://t4.ftcdn.net/jpg/05/89/93/27/360_F_589932782_vQAEAZhHnq1QCGu5ikwrYaQD0Mmurm0N.webp'
+
+    },
     bio: String,
     posts: [
         {
