@@ -4,6 +4,10 @@ import { Inter } from 'next/font/google'
 
 import AuthProvider from '@/app/context/authProvider'
 
+import TopBar from '@/components/shared/TopBar';
+import LeftSideBar from '@/components/shared/LeftSideBar';
+import BottomBar from '@/components/shared/BottomBar';
+
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -20,10 +24,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <AuthProvider>
-          {/* <Topbar /> */}
+          <TopBar />
 
           <main className="flex flex-row">
-            {/* <LeftSidebar /> */}
+            <LeftSideBar />
             <section className='main-container'>
               <div className='w-full max-w-4xl'>
                 {children}
@@ -31,7 +35,7 @@ export default function RootLayout({
             </section>
           </main>
 
-          {/* <Bottombar /> */}
+          <BottomBar />
         </AuthProvider>
       </body>
     </html>

@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import AuthProvider from "@/app/context/authProvider";
 
+import TopBar from '@/components/shared/TopBar';
+
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -25,7 +27,10 @@ export default function RootLayout({
         <body className={`${inter.className} bg-dark-1`}>
             <ToastContainer />
             <AuthProvider>
-                {children}
+                <TopBar />
+                <main>
+                    {children}
+                </main>
             </AuthProvider>
         </body>
       </html>
