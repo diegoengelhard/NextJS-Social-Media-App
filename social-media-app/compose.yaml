@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: next_social_media_app
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    environment:
+      - mongodb+srv://00356119:pass123@social-media-app.tiv9j1q.mongodb.net/?retryWrites=true&w=majority&appName=social-media-app
+    volumes:
+      - .:/app
+      - /app/node_modules
