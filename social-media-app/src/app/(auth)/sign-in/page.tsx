@@ -21,11 +21,16 @@ const page = () => {
                 redirect: false,
             });
 
+            // if (res?.error) {
+            //     toast.error(res.error);
+            //     return;
+            // }
+
             toast.success("Sign In Successful!");
-            router.push('/');
+            // router.push('/');
         } catch (error: any) {
             console.log(error);
-            toast.error(error.response.data.error);
+            toast.error('Error signing in.');
         }
     };
 
@@ -44,7 +49,7 @@ const page = () => {
                     <input
                         onChange={(e) => setPassword(e.target.value)}
                         type="password"
-                        placeholder="**********"
+                        placeholder="Password"
                         className="w-full p-2 rounded border border-gray-300"
                     />
                     <button onClick={handleSubmit} className="bg-gray-800 text-white font-bold py-2 px-4 rounded">
