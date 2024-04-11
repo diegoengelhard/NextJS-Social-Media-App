@@ -15,19 +15,19 @@ const page = () => {
         e.preventDefault();
 
         try {
-            await signIn("credentials", {
+            const res = await signIn("credentials", {
                 email,
                 password,
                 redirect: false,
             });
 
-            // if (res?.error) {
-            //     toast.error(res.error);
-            //     return;
-            // }
-
-            toast.success("Sign In Successful!");
-            // router.push('/');
+            if (res?.error) {
+                toast.error('Invalid credentials. Please try again.');
+                return;
+            } else {
+                toast.success("Sign In Successful!");
+                router.push('/');
+            }
         } catch (error: any) {
             console.log(error);
             toast.error('Error signing in.');
