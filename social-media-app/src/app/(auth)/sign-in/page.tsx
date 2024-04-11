@@ -30,11 +30,11 @@ const page = () => {
     };
 
     return (
-        <div className="grid place-items-center h-screen">
-            <div className="shadow-md p-8 border-t-4 border-primary-500 rounded-md">
+        <div className="flex justify-center items-center h-screen">
+            <div className="bg-dark-2 shadow-md p-8 border-t-4 border-primary-500 rounded-md w-3/4">
                 <h1 className="text-2xl font-bold mb-4 text-white">Sign In</h1>
 
-                <div className="rounded border border-gray-300 p-6 space-y-4">
+                <div className="rounded p-6 space-y-4">
                     <input
                         onChange={(e) => setEmail(e.target.value)}
                         type="email"
@@ -52,7 +52,7 @@ const page = () => {
                     </button>
                 </div>
 
-                <a href="/sign-up" className="text-sm text-black block mt-4">Don't have an account? Sign Up</a>
+                <a href="/sign-up" className="text-sm text-white block mt-4">Don't have an account? Sign Up</a>
             </div>
         </div>
 
