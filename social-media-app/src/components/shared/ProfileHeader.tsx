@@ -5,7 +5,7 @@ import Image from "next/image";
 // Define props
 interface Props {
     accountId: string;
-    authUserId: string;
+    authUserId?: string;
     name: string;
     username: string;
     imgUrl: string;
@@ -49,7 +49,7 @@ const ProfileHeader = ({
                 </div>
 
                 {/* If user id from params = user id who's signed in, show edit */}
-                {accountId === authUserId && type !== "Community" && (
+                {JSON.stringify(accountId) === JSON.stringify(authUserId) && type !== "Community" && (
                     <Link href={`/profile/${accountId}/edit`}>
                         <div className='flex cursor-pointer gap-3 rounded-lg bg-dark-3 px-4 py-2'>
                             <Image

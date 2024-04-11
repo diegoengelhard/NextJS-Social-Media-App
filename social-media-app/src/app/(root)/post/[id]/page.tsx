@@ -18,6 +18,8 @@ const page = async ({ params }: { params: { id: string } }) => {
 
     const post = await fetchPostById(params.id);
 
+    console.log(post.author)
+
     return (
         <>
             <section className='relative'>
@@ -36,13 +38,15 @@ const page = async ({ params }: { params: { id: string } }) => {
                 </div>
 
                 {/* Display comment form */}
-                <div className='mt-7'>
-                    <CommentForm
-                        postId={params.id}
-                        currentUserImg={user.imageUrl}
-                        currentUserId={JSON.stringify(user._id)}
-                    />
-                </div>
+                {session && (
+                    <div className='mt-7'>
+                        <CommentForm
+                            postId={params.id}
+                            currentUserImg={user?.imageUrl}
+                            currentUserId={JSON.stringify(user?._id)}
+                        />
+                    </div>
+                )}
 
                 {/* Display comments under parent post  */}
                 <div className='mt-10'>

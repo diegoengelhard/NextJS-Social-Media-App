@@ -10,6 +10,8 @@ import { fetchUser, getActivity } from "@/lib/actions/user.actions";
 const page = async () => {
     const session = await getServerSession(options)
 
+    if (!session) redirect('/');
+
     const user = await fetchUser(session?.user?.email || '');
 
     const activity = await getActivity(user._id); // Fetch the user activity from db

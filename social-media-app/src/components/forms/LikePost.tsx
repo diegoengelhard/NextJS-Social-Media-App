@@ -2,7 +2,9 @@
 import React, { useState } from 'react';
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { useSession } from 'next-auth/react';
 import { toggleLikeOnPost } from '@/lib/actions/post.action';
+import { toast } from 'react-toastify';
 
 // Define props
 interface Props {
@@ -12,6 +14,7 @@ interface Props {
 }
 
 const LikePost = ({ postId, userId, likes }: Props) => {
+    const { data: session } = useSession(); // Get session
     // Set post likes
     const [postLikes, setPostLikes] = useState(likes);
 
@@ -23,13 +26,18 @@ const LikePost = ({ postId, userId, likes }: Props) => {
     // Like post function
     const likePost = async () => {
         try {
-            await toggleLikeOnPost(postId, userId, pathname); // like post
-
-            // Update post likes
-            if (hasLiked) {
-                setPostLikes(likes.filter((like) => like !== userId));
+            if (!session) {
+                toast.error('Please sign in to like this post!');
+                return;
             } else {
-                setPostLikes([...likes, userId]);
+                await toggleLikeOnPost(postId, userId, pathname); // like post
+
+                // Update post likes
+                if (hasLiked) {
+                    setPostLikes(likes.filter((like) => like !== userId));
+                } else {
+                    setPostLikes([...likes, userId]);
+                }
             }
         } catch (error) {
             console.log('Error liking post: ', error);
@@ -43,7 +51,7 @@ const LikePost = ({ postId, userId, likes }: Props) => {
                 return (
                     <>
                         <div className="flex space-x-2">
-                            <span>{postLikes.length}</span>
+                            <span className='text-white'>{postLikes.length}</span>
                             <Image
                                 src='/assets/heart-filled.svg'
                                 alt='heart'
@@ -59,7 +67,7 @@ const LikePost = ({ postId, userId, likes }: Props) => {
                 return (
                     <>
                         <div className="flex space-x-2">
-                            <span>{postLikes.length}</span>
+                            <span className='text-white'>{postLikes.length}</span>
                             <Image
                                 src='/assets/heart-gray.svg'
                                 alt='heart'

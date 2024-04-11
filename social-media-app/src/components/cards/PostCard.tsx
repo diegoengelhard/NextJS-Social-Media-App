@@ -6,6 +6,7 @@ import { getServerSession } from "next-auth/next"
 import { options } from '@/app/api/auth/[...nextauth]/options';
 
 import { fetchUser } from "@/lib/actions/user.actions";
+import { fetchUserById } from "@/lib/actions/user.actions";
 import { formatDateString } from '@/lib/utils';
 
 import LikePost from '@/components/forms/LikePost';
@@ -51,6 +52,10 @@ const PostCard = async ({
 
     const user = await fetchUser(session?.user?.email || '');
 
+    const postUser = await fetchUserById(author._id);
+
+    console.log(postUser)   
+
     return (
         <article
             className={`flex w-full flex-col rounded-xl ${isComment ? "px-0 xs:px-7" : "bg-dark-2 p-7"}`}
@@ -75,7 +80,7 @@ const PostCard = async ({
                     <div className='flex w-full flex-col'>
                         <Link href={`/profile/${author._id}`} className='w-fit'>
                             <h4 className='cursor-pointer text-base-semibold text-light-1'>
-                                @{author.username}
+                                @{postUser.username}
                             </h4>
                         </Link>
 
@@ -86,7 +91,7 @@ const PostCard = async ({
                             <div className='flex gap-3.5'>
                                 <LikePost
                                     postId={id}
-                                    userId={user._id}
+                                    userId={user?._id}
                                     likes={likes}
                                 />
                                 <Link href={`/post/${id}`}>
@@ -98,7 +103,7 @@ const PostCard = async ({
                                         className='cursor-pointer object-contain'
                                     />
                                 </Link>
-                                {user.username === author.username && (
+                                {session && user?.username === author.username && (
                                     <>
                                         <Link href={`/edit-post/${id}`}>
                                             <Image

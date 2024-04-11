@@ -18,7 +18,22 @@ export default async function Home() {
 
   return (
     <main className="text-white">
-      <h1 className="text-4xl font-bold text-white">Welcome to the social media app</h1>
+      <h1 className="text-4xl font-bold text-white">
+        {session ? (
+          <>
+            <div className='flex'>
+              <img
+                src={user.image}
+                alt={user.username}
+                className="rounded-full w-10 h-10 mr-4"
+              />
+              <p className='mt-2'>Welcome, @{user.username}!</p>
+            </div>
+          </>
+        ) : (
+          'Welcome to the social media app'
+        )}
+      </h1>
 
       {/* Render fetched posts */}
       <section className='mt-9 flex flex-col gap-10'>
